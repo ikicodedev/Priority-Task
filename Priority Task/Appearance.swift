@@ -7,12 +7,24 @@
 //
 import UIKit
 
+// MARK: App Colors
+
+struct AppColor {
+    static let blue = UIColor(hue: 212/360, saturation: 67/100, brightness: 89/100, alpha: 1)
+    static let transparentBlue = UIColor(hue: 212/360, saturation: 67/100, brightness: 89/100, alpha: 0.3)
+    static let golden = UIColor(hue: 39/360, saturation: 100/100, brightness: 70/100, alpha: 1)
+    static let transparentGolden = UIColor(hue: 39/360, saturation: 100/100, brightness: 70/100, alpha: 0.3)
+    static let gray = UIColor(hue: 285/360, saturation: 0, brightness: 61/100, alpha: 1)
+}
+
+// MARK: Views
+
 extension UINavigationBar {
     
     public override func awakeFromNib() {
         self.tintColor = UIColor.whiteColor()
         self.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
-        self.barTintColor = UIColor(hue: 212/360, saturation: 67/100, brightness: 89/100, alpha: 1)
+        self.barTintColor = AppColor.blue
     }
 }
 

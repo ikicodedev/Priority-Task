@@ -13,7 +13,8 @@
 		3F1670511CAD6CFE00D58803 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F16704F1CAD6CFE00D58803 /* LaunchScreen.storyboard */; };
 		3F1670601CAD765C00D58803 /* TaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F16705F1CAD765C00D58803 /* TaskTableViewController.swift */; };
 		3F4FC91D1D3CDA5A006F46D5 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4FC91C1D3CDA5A006F46D5 /* TaskViewController.swift */; };
-		3F4FC9201D3CF1A7006F46D5 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4FC91F1D3CF1A7006F46D5 /* Styles.swift */; };
+		3F4FC9201D3CF1A7006F46D5 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4FC91F1D3CF1A7006F46D5 /* Appearance.swift */; };
+		3F95EAAD1D3F948C0059A46E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F95EAAC1D3F948C0059A46E /* Task.swift */; };
 		3FC519541CADCE2A009A8F85 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC519531CADCE2A009A8F85 /* TaskTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +29,8 @@
 		3F1670631CAD886300D58803 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		3F1670641CAD886300D58803 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		3F4FC91C1D3CDA5A006F46D5 /* TaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
-		3F4FC91F1D3CF1A7006F46D5 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
+		3F4FC91F1D3CF1A7006F46D5 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		3F95EAAC1D3F948C0059A46E /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		3FC519531CADCE2A009A8F85 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,11 +65,12 @@
 			isa = PBXGroup;
 			children = (
 				3F1670431CAD6CFE00D58803 /* AppDelegate.swift */,
-				3F4FC91F1D3CF1A7006F46D5 /* Styles.swift */,
-				3F16704D1CAD6CFE00D58803 /* Assets.xcassets */,
+				3F4FC91F1D3CF1A7006F46D5 /* Appearance.swift */,
 				3F1670611CAD766900D58803 /* Controllers */,
+				3F95EAAB1D3F946B0059A46E /* Model */,
 				3F1670471CAD6CFE00D58803 /* Main.storyboard */,
 				3F16704F1CAD6CFE00D58803 /* LaunchScreen.storyboard */,
+				3F16704D1CAD6CFE00D58803 /* Assets.xcassets */,
 				3F1670581CAD754D00D58803 /* Resources */,
 			);
 			path = "Priority Task";
@@ -89,6 +92,14 @@
 				3F4FC91C1D3CDA5A006F46D5 /* TaskViewController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		3F95EAAB1D3F946B0059A46E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3F95EAAC1D3F948C0059A46E /* Task.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,9 +174,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FC519541CADCE2A009A8F85 /* TaskTableViewCell.swift in Sources */,
-				3F4FC9201D3CF1A7006F46D5 /* Styles.swift in Sources */,
+				3F4FC9201D3CF1A7006F46D5 /* Appearance.swift in Sources */,
 				3F4FC91D1D3CDA5A006F46D5 /* TaskViewController.swift in Sources */,
 				3F1670441CAD6CFE00D58803 /* AppDelegate.swift in Sources */,
+				3F95EAAD1D3F948C0059A46E /* Task.swift in Sources */,
 				3F1670601CAD765C00D58803 /* TaskTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,6 +297,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.markezsoft.Priority-Task";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -296,6 +309,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.markezsoft.Priority-Task";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

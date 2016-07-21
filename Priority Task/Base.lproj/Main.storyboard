@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wQm-Ga-L4w">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4zY-eR-he1">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Tasks-->
+        <!--Tareas-->
         <scene sceneID="FgK-Uy-4SU">
             <objects>
                 <tableViewController id="Mae-PL-IJq" customClass="TaskTableViewController" customModule="Priority_Task" sceneMemberID="viewController">
@@ -23,15 +23,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hUz-ze-uUf">
-                                            <rect key="frame" x="8" y="8" width="584" height="51.5"/>
+                                            <rect key="frame" x="8" y="8" width="584" height="43.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prueba de texto largo para ver como va quedando las tareas con titulos largos de cojones" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXx-uu-cbW">
-                                                    <rect key="frame" x="23" y="8" width="553" height="35.5"/>
+                                                    <rect key="frame" x="23" y="8" width="553" height="27.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z6C-3P-oR3">
-                                                    <rect key="frame" x="0.0" y="0.0" width="15" height="51.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="15" height="43.5"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="15" id="U58-7A-Lhs"/>
@@ -51,7 +51,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="hUz-ze-uUf" firstAttribute="trailing" secondItem="tW9-A9-6dF" secondAttribute="trailingMargin" id="Oih-1G-2oQ"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="hUz-ze-uUf" secondAttribute="bottom" constant="-8" id="Unm-GX-z0b"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="hUz-ze-uUf" secondAttribute="bottom" id="Unm-GX-z0b"/>
                                         <constraint firstItem="hUz-ze-uUf" firstAttribute="leading" secondItem="tW9-A9-6dF" secondAttribute="leadingMargin" id="lOf-dj-5y9"/>
                                         <constraint firstItem="hUz-ze-uUf" firstAttribute="top" secondItem="tW9-A9-6dF" secondAttribute="topMargin" id="lhx-m1-V8K"/>
                                     </constraints>
@@ -61,6 +61,7 @@
                                     <outlet property="contentView" destination="tW9-A9-6dF" id="3wk-Ad-8WE"/>
                                     <outlet property="taskColorMark" destination="Z6C-3P-oR3" id="eZe-IW-xtX"/>
                                     <outlet property="taskTitleLabel" destination="vXx-uu-cbW" id="1eF-bd-x4C"/>
+                                    <segue destination="M0V-iD-S67" kind="show" identifier="ShowTaskDetail" id="t0C-Oe-WbT"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -69,7 +70,7 @@
                             <outlet property="delegate" destination="Mae-PL-IJq" id="rZH-DW-S1U"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Tasks" id="MoE-9Z-UnG">
+                    <navigationItem key="navigationItem" title="Tareas" id="MoE-9Z-UnG">
                         <barButtonItem key="rightBarButtonItem" image="ic_task_nav_bar_add" id="rOX-cc-F9E">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -122,12 +123,12 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Urgente" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6OS-0Q-eCf">
                                                 <rect key="frame" x="0.0" y="6" width="501" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.69803921568627447" green="0.45098039215686275" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="CrJ-Gb-btK">
                                                 <rect key="frame" x="511" y="0.0" width="51" height="31"/>
-                                                <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="onTintColor" red="0.69803921568627447" green="0.45098039215686275" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </switch>
                                         </subviews>
                                     </stackView>
@@ -142,15 +143,27 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Nueva Tarea" id="54G-ec-oPe">
-                        <barButtonItem key="rightBarButtonItem" title="Guardar" id="qQZ-c6-W0B"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancelar" id="eZM-KJ-NUQ">
+                            <connections>
+                                <action selector="cancel:" destination="M0V-iD-S67" id="ckD-Py-hrn"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Guardar" id="qQZ-c6-W0B">
+                            <connections>
+                                <segue destination="ZQI-tf-0BI" kind="unwind" unwindAction="unwindToTaskList:" id="RnH-l5-i8d"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="dateTextField" destination="MGe-Se-NzH" id="5Hq-1i-EBh"/>
                         <outlet property="descriptionTextView" destination="tQy-pj-g9C" id="PgB-oz-jbj"/>
+                        <outlet property="saveButton" destination="qQZ-c6-W0B" id="gOb-kJ-r26"/>
                         <outlet property="titleTextField" destination="guI-jN-48h" id="ZGW-Qx-4XV"/>
+                        <outlet property="urgentSwitch" destination="CrJ-Gb-btK" id="i5R-we-QwG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Txt-0H-TdA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ZQI-tf-0BI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3023" y="-355"/>
         </scene>
@@ -197,4 +210,7 @@
     <resources>
         <image name="ic_task_nav_bar_add" width="22" height="22"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="t0C-Oe-WbT"/>
+    </inferredMetricsTieBreakers>
 </document>
