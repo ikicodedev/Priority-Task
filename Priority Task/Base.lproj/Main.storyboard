@@ -23,15 +23,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hUz-ze-uUf">
-                                            <rect key="frame" x="8" y="8" width="584" height="43.5"/>
+                                            <rect key="frame" x="8" y="4" width="584" height="51.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prueba de texto largo para ver como va quedando las tareas con titulos largos de cojones" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXx-uu-cbW">
-                                                    <rect key="frame" x="23" y="8" width="553" height="27.5"/>
+                                                    <rect key="frame" x="23" y="8" width="553" height="35.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z6C-3P-oR3">
-                                                    <rect key="frame" x="0.0" y="0.0" width="15" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="15" height="51.5"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="15" id="U58-7A-Lhs"/>
@@ -51,9 +51,9 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="hUz-ze-uUf" firstAttribute="trailing" secondItem="tW9-A9-6dF" secondAttribute="trailingMargin" id="Oih-1G-2oQ"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="hUz-ze-uUf" secondAttribute="bottom" id="Unm-GX-z0b"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="hUz-ze-uUf" secondAttribute="bottom" constant="-4" id="Unm-GX-z0b"/>
                                         <constraint firstItem="hUz-ze-uUf" firstAttribute="leading" secondItem="tW9-A9-6dF" secondAttribute="leadingMargin" id="lOf-dj-5y9"/>
-                                        <constraint firstItem="hUz-ze-uUf" firstAttribute="top" secondItem="tW9-A9-6dF" secondAttribute="topMargin" id="lhx-m1-V8K"/>
+                                        <constraint firstItem="hUz-ze-uUf" firstAttribute="top" secondItem="tW9-A9-6dF" secondAttribute="topMargin" constant="-4" id="lhx-m1-V8K"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

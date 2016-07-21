@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "TaskTableViewController.numberOfSectionsInTableView(UITableView) -&gt; Int:TaskTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sortedSections.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TaskTableViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:TaskTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sections">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

@@ -117,7 +117,7 @@ class TaskTableViewController: UITableViewController {
     // MARK: TableView Delegate
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
+        return 25
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -163,15 +163,7 @@ class TaskTableViewController: UITableViewController {
         if let tasks = NSKeyedUnarchiver.unarchiveObjectWithFile(Task.ArchiveURL.path!) as? [Task]{
             
             for task in tasks {
-                
-                let dateString = dateFormatter.stringFromDate(task.date)
-                if self.sections.indexForKey(dateString) == nil {
-                    self.sections[dateString] = [task]
-                }
-                else {
-                    self.sections[dateString]?.append(task)
-                }
-                
+                self.addTaskToList(task)
             }
             
             setSortedSections()
@@ -190,6 +182,12 @@ class TaskTableViewController: UITableViewController {
     }
 
     func addTaskToList(task: Task) {
-        sections[dateFormatter.stringFromDate(task.date)] = [task]
+        let dateString = dateFormatter.stringFromDate(task.date)
+        if self.sections.indexForKey(dateString) == nil {
+            self.sections[dateString] = [task]
+        }
+        else {
+            self.sections[dateString]?.append(task)
+        }
     }
 }
