@@ -62,16 +62,15 @@ class TaskTableViewController: UITableViewController {
                 // Update an existing task.
                 let dateString = sortedSections[selectedIndexPath.section]
                 sections[dateString]?[selectedIndexPath.row] = task
-                tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
             }
             else {
-                // Add a new meal.
+                // Add a new task
                 addTaskToList(task)
                 setSortedSections()
-                tableView.reloadData()
             }
             
             saveTasks()
+            tableView.reloadData()
         }
     }
 
@@ -82,7 +81,13 @@ class TaskTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[sortedSections[section]]!.count
+        
+        if let taskCountInSection = sections[sortedSections[section]] {
+            return taskCountInSection.count
+        }
+        else {
+            return 0
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -112,6 +117,23 @@ class TaskTableViewController: UITableViewController {
         cell.taskTitleLabel.text = task!.title
 
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            
+            let dateSection = sortedSections[indexPath.section]
+            sections[dateSection]?.removeAtIndex(indexPath.row)
+            
+            if sections[dateSection]?.count == 0 {
+                sections.removeValueForKey(dateSection)
+                setSortedSections()
+            }
+            
+            saveTasks()
+            tableView.reloadData()
+            
+        }
     }
     
     // MARK: TableView Delegate
@@ -160,7 +182,7 @@ class TaskTableViewController: UITableViewController {
     
     func loadTasks() -> Bool {
         
-        if let tasks = NSKeyedUnarchiver.unarchiveObjectWithFile(Task.ArchiveURL.path!) as? [Task]{
+        if let tasks = NSKeyedUnarchiver.unarchiveObjectWithFile(Task.ArchiveURL.path!) as? [Task] where tasks.count > 0{
             
             for task in tasks {
                 self.addTaskToList(task)
