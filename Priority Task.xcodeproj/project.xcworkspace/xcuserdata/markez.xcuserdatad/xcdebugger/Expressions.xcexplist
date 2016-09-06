@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "Task.ArchiveURL.unsafeMutableAddressor:Task.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DocumentsDirectory">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "TaskTableViewController.numberOfSectionsInTableView(UITableView) -&gt; Int:TaskTableViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -15,6 +23,22 @@
          <PersistentStrings>
             <PersistentString
                value = "sections">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TaskTableViewController.loadTasks() -&gt; Bool:TaskTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "NSKeyedUnarchiver.unarchiveObjectWithFile(Task.ArchiveURL.path!) as? [Task]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TaskTableViewController.saveTasks() -&gt; ():TaskTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "NSKeyedUnarchiver.unarchiveObjectWithFile(Task.ArchiveURL.path!) as? [Task]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

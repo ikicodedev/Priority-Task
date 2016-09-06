@@ -59,9 +59,21 @@ class TaskTableViewController: UITableViewController {
         if let sourceViewController = sender.sourceViewController as? TaskViewController, task = sourceViewController.task {
             
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                // Update an existing task.
+                // Update an existing task
                 let dateString = sortedSections[selectedIndexPath.section]
-                sections[dateString]?[selectedIndexPath.row] = task
+                let newDateTask = dateFormatter.stringFromDate(task.date)
+                
+                if dateString == newDateTask {
+                    sections[dateString]?[selectedIndexPath.row] = task
+                }
+                else {
+                    sections[dateString]?.removeAtIndex(selectedIndexPath.row)
+                    addTaskToList(task)
+                    if sections[dateString]?.count == 0 {
+                        sections.removeValueForKey(dateString)
+                    }
+                    setSortedSections()
+                }
             }
             else {
                 // Add a new task
@@ -173,7 +185,14 @@ class TaskTableViewController: UITableViewController {
     // MARK: NSCoding
     
     func saveTasks() {
-        let tasks = Array(self.sections.values)
+        
+        let arrayOfTaskArrays = Array(self.sections.values)
+        var tasks = Array<Task>()
+        
+        for taskArray in arrayOfTaskArrays {
+            tasks += taskArray
+        }
+        
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(tasks, toFile: Task.ArchiveURL.path!)
         if !isSuccessfulSave {
             print("Failed to save tasks...")
@@ -200,7 +219,7 @@ class TaskTableViewController: UITableViewController {
     
     // MARK: Auxiliar methods
     func setSortedSections() {
-        self.sortedSections = [String](self.sections.keys).sort() { $0 < $1 }
+        self.sortedSections = [String](self.sections.keys.sort(){dateFormatter.dateFromString($0)!.compare(dateFormatter.dateFromString($1)!) == .OrderedAscending})
     }
 
     func addTaskToList(task: Task) {

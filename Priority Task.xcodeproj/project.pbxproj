@@ -134,6 +134,7 @@
 				TargetAttributes = {
 					3F16703F1CAD6CFD00D58803 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 84Y7Q74F6N;
 					};
 				};
 			};
@@ -293,9 +294,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Priority Task/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.markezsoft.Priority-Task";
+				PRODUCT_BUNDLE_IDENTIFIER = com.markezsoft.prioritytask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -305,9 +307,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Priority Task/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.markezsoft.Priority-Task";
+				PRODUCT_BUNDLE_IDENTIFIER = com.markezsoft.prioritytask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
