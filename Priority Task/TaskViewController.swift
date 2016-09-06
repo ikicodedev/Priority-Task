@@ -189,7 +189,9 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             
             let urgent = urgentSwitch.on
             
-            task = Task(title: title, detail: detail, date: date!, urgent: urgent, completed: (task?.completed)!)
+            let complete = task?.completed ?? false
+            
+            task = Task(title: title, detail: detail, date: date!, urgent: urgent, completed: complete)
         }
     }
     
