@@ -22,6 +22,7 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var urgentSwitch: UISwitch!
+    @IBOutlet weak var completeLabel: UILabel!
     
     // MARK: Model
     
@@ -51,6 +52,10 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             descriptionTextView.text = task.detail
             self.setTaskDate(task.date)
             urgentSwitch.on = task.urgent
+            
+            if !task.completed {
+                self.completeLabel.hidden = true
+            }
         }
         
         // Enable the Save button only if the title field is valid.
@@ -182,7 +187,7 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             
             let urgent = urgentSwitch.on
             
-            task = Task(title: title, detail: detail, date: date!, urgent: urgent)
+            task = Task(title: title, detail: detail, date: date!, urgent: urgent, completed: (task?.completed)!)
         }
     }
     

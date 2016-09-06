@@ -18,14 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Priority Task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wf7-44-8q0">
-                                <rect key="frame" x="203.5" y="40" width="193" height="43"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Markez Soft" textAlignment="center" lineBreakMode="characterWrap" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHg-de-75l">
-                                <rect key="frame" x="232" y="544" width="136" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Markez Soft" textAlignment="center" lineBreakMode="characterWrap" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHg-de-75l">
+                                <rect key="frame" x="246.5" y="428" width="107.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -43,16 +37,30 @@
                                     </mask>
                                 </variation>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Priority Task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wf7-44-8q0">
+                                <rect key="frame" x="204" y="129" width="193" height="43"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="UCA-kU-ypZ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Dln-5B-T8c"/>
+                            <constraint firstItem="UCA-kU-ypZ" firstAttribute="top" secondItem="wf7-44-8q0" secondAttribute="bottom" constant="8" id="FEr-af-ewR"/>
                             <constraint firstItem="tHg-de-75l" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Xob-n0-uM6"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="tHg-de-75l" secondAttribute="bottom" constant="20" id="b6Z-mK-0sg"/>
                             <constraint firstItem="wf7-44-8q0" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="20" id="df1-yc-Mz6"/>
                             <constraint firstItem="UCA-kU-ypZ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="xdJ-Ii-mf5"/>
                             <constraint firstItem="wf7-44-8q0" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="xx2-1B-0wW"/>
+                            <constraint firstItem="tHg-de-75l" firstAttribute="top" secondItem="UCA-kU-ypZ" secondAttribute="bottom" constant="8" id="zg2-zb-H28"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="df1-yc-Mz6"/>
+                                <exclude reference="b6Z-mK-0sg"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>

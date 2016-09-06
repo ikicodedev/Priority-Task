@@ -120,32 +120,89 @@ class TaskTableViewController: UITableViewController {
             cell.taskColorMark.backgroundColor = AppColor.blue
             cell.taskTitleLabel.textColor = AppColor.blue
         }
-
+        
         cell.contentTaskView.layer.cornerRadius = 10
         cell.contentTaskView.clipsToBounds = true
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         // Task data
-        cell.taskTitleLabel.text = task!.title
+        if task!.completed {
+            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: task!.title)
+            attributeString.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, attributeString.length))
+            cell.taskTitleLabel.attributedText = attributeString
+        } else {
+            cell.taskTitleLabel.text = task!.title
+        }
 
         return cell
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        var result = Array<UITableViewRowAction>()
+        
+        let dateSection = self.sortedSections[indexPath.section]
+        if let selectedTask = self.sections[dateSection]?[indexPath.row] {
             
-            let dateSection = sortedSections[indexPath.section]
-            sections[dateSection]?.removeAtIndex(indexPath.row)
+            // Complete Action
+            let complete = UITableViewRowAction(style: .Normal, title: "Completar") { action, index in
+                
+                selectedTask.completed = true
+                
+                self.saveTasks()
+                tableView.reloadData()
+                
+            }
+            complete.backgroundColor = AppColor.gray
             
-            if sections[dateSection]?.count == 0 {
-                sections.removeValueForKey(dateSection)
-                setSortedSections()
+            // Pending Action
+            let pending = UITableViewRowAction(style: .Normal, title: "Pendiente") { action, index in
+                
+                selectedTask.completed = false
+                
+                self.saveTasks()
+                tableView.reloadData()
+                
+            }
+            pending.backgroundColor = AppColor.gray
+            
+            // Delete Action
+            let delete = UITableViewRowAction(style: .Normal, title: "Eliminar") { action, index in
+                
+                self.sections[dateSection]?.removeAtIndex(index.row)
+                
+                if self.sections[dateSection]?.count == 0 {
+                    self.sections.removeValueForKey(dateSection)
+                    self.setSortedSections()
+                }
+                
+                self.saveTasks()
+                tableView.reloadData()
+                
+            }
+            delete.backgroundColor = UIColor.redColor()
+            
+            // Select action 
+            result.append(delete)
+            
+            if selectedTask.completed {
+                result.append(pending)
+            }
+            else {
+                result.append(complete)
             }
             
-            saveTasks()
-            tableView.reloadData()
-            
         }
+        
+        return result
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // the cells you would like the actions to appear needs to be editable
+        return true
     }
     
     // MARK: TableView Delegate
