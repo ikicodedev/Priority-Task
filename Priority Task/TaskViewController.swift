@@ -36,6 +36,8 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
         titleTextField.delegate = self
         
+        self.completeLabel.hidden = true
+        
         // Description placeholder
         descriptionTextView.delegate = self
         if (descriptionTextView.text.isEmpty) {
@@ -53,8 +55,8 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             self.setTaskDate(task.date)
             urgentSwitch.on = task.urgent
             
-            if !task.completed {
-                self.completeLabel.hidden = true
+            if task.completed {
+                self.completeLabel.hidden = false
             }
         }
         
