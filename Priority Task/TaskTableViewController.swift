@@ -169,6 +169,21 @@ class TaskTableViewController: UITableViewController {
             }
             pending.backgroundColor = AppColor.gray
             
+            // Share Action
+            let share = UITableViewRowAction(style: .Normal, title: "Compartir") { action, index in
+                
+                var shareText = dateSection + " - " + selectedTask.title
+                
+                if !selectedTask.detail.isEmpty {
+                    shareText += ":\n\t* " + selectedTask.detail
+                }
+                
+                let vc = UIActivityViewController(activityItems: [shareText], applicationActivities: [])
+                self.presentViewController(vc, animated: true, completion: nil)
+                
+            }
+            share.backgroundColor = AppColor.blue
+            
             // Delete Action
             let delete = UITableViewRowAction(style: .Normal, title: "Eliminar") { action, index in
                 
@@ -187,6 +202,7 @@ class TaskTableViewController: UITableViewController {
             
             // Select action 
             result.append(delete)
+            result.append(share)
             
             if selectedTask.completed {
                 result.append(pending)
