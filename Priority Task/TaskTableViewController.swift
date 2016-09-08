@@ -89,6 +89,15 @@ class TaskTableViewController: UITableViewController {
     // MARK: Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        if sortedSections.count == 0 {
+            let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
+            noDataLabel.text = "Todas las tareas han sido completadas"
+            noDataLabel.textColor = AppColor.blue
+            noDataLabel.textAlignment = .Center
+            tableView.backgroundView = noDataLabel
+        }
+        
         return sortedSections.count
     }
 
@@ -156,7 +165,7 @@ class TaskTableViewController: UITableViewController {
                 tableView.reloadData()
                 
             }
-            complete.backgroundColor = AppColor.gray
+            complete.backgroundColor = AppColor.golden
             
             // Pending Action
             let pending = UITableViewRowAction(style: .Normal, title: "Pendiente") { action, index in
@@ -167,7 +176,7 @@ class TaskTableViewController: UITableViewController {
                 tableView.reloadData()
                 
             }
-            pending.backgroundColor = AppColor.gray
+            pending.backgroundColor = AppColor.golden
             
             // Share Action
             let share = UITableViewRowAction(style: .Normal, title: "Compartir") { action, index in
@@ -274,7 +283,7 @@ class TaskTableViewController: UITableViewController {
     
     func loadTasks() -> Bool {
         
-        if let tasks = NSKeyedUnarchiver.unarchiveObjectWithFile(Task.ArchiveURL.path!) as? [Task] where tasks.count > 0{
+        if let tasks = NSKeyedUnarchiver.unarchiveObjectWithFile(Task.ArchiveURL.path!) as? [Task] {
             
             for task in tasks {
                 self.addTaskToList(task)
