@@ -11,6 +11,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "TaskViewController.datePickerValueChanged(UIDatePicker) -&gt; ():TaskViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "NSCalendar.currentCalendar().compareDate(currentDate,toDate:sender.date, toUnitGranularity:NSCalendarUnit.Day)">
+            </PersistentString>
+            <PersistentString
+               value = "sender.date">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "TaskTableViewController.numberOfSectionsInTableView(UITableView) -&gt; Int:TaskTableViewController.swift">
          <PersistentStrings>
             <PersistentString

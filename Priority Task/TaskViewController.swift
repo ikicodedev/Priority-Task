@@ -74,6 +74,7 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         toolBar.sizeToFit()
         
         let datePickerView:UIDatePicker = UIDatePicker()
+        datePickerView.timeZone = NSTimeZone.localTimeZone()
         datePickerView.datePickerMode = UIDatePickerMode.Date
         datePickerView.addTarget(self, action: #selector(datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
         
@@ -103,7 +104,7 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
         let currentDate = NSDate()
         
-        if currentDate.earlierDate(sender.date).isEqualToDate(sender.date) {
+        if NSCalendar.currentCalendar().compareDate(currentDate, toDate:sender.date, toUnitGranularity:NSCalendarUnit.Day) == NSComparisonResult.OrderedDescending {
             
             let alert = UIAlertController(title: "Atención", message: "La fecha tiene que ser la de hoy o una futura", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
