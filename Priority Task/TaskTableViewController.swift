@@ -96,6 +96,8 @@ class TaskTableViewController: UITableViewController {
             noDataLabel.textColor = AppColor.blue
             noDataLabel.textAlignment = .Center
             tableView.backgroundView = noDataLabel
+        } else {
+            tableView.backgroundView = nil
         }
         
         return sortedSections.count
@@ -238,7 +240,7 @@ class TaskTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
-        headerView.backgroundColor = UIColor.clearColor()
+        headerView.backgroundColor = UIColor.whiteColor()
         let title = UILabel(frame: CGRect(x: 0, y: 5, width: self.view.frame.width - 10, height: 20))
         title.textColor = AppColor.gray
         title.textAlignment = .Right

@@ -15,6 +15,8 @@
 		3F4FC91D1D3CDA5A006F46D5 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4FC91C1D3CDA5A006F46D5 /* TaskViewController.swift */; };
 		3F4FC9201D3CF1A7006F46D5 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4FC91F1D3CF1A7006F46D5 /* Appearance.swift */; };
 		3F95EAAD1D3F948C0059A46E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F95EAAC1D3F948C0059A46E /* Task.swift */; };
+		3FC21EB81D8959D300E8E93B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC21EB61D8959D300E8E93B /* Fabric.framework */; };
+		3FC21EB91D8959D300E8E93B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC21EB71D8959D300E8E93B /* Crashlytics.framework */; };
 		3FC519541CADCE2A009A8F85 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC519531CADCE2A009A8F85 /* TaskTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +33,8 @@
 		3F4FC91C1D3CDA5A006F46D5 /* TaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		3F4FC91F1D3CF1A7006F46D5 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		3F95EAAC1D3F948C0059A46E /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		3FC21EB61D8959D300E8E93B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		3FC21EB71D8959D300E8E93B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		3FC519531CADCE2A009A8F85 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -39,6 +43,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FC21EB91D8959D300E8E93B /* Crashlytics.framework in Frameworks */,
+				3FC21EB81D8959D300E8E93B /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +56,8 @@
 			children = (
 				3F1670421CAD6CFD00D58803 /* Priority Task */,
 				3F1670411CAD6CFD00D58803 /* Products */,
+				3FC21EB61D8959D300E8E93B /* Fabric.framework */,
+				3FC21EB71D8959D300E8E93B /* Crashlytics.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,6 +120,7 @@
 				3F16703C1CAD6CFD00D58803 /* Sources */,
 				3F16703D1CAD6CFD00D58803 /* Frameworks */,
 				3F16703E1CAD6CFD00D58803 /* Resources */,
+				3FC21EB51D89594100E8E93B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -168,6 +177,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3FC21EB51D89594100E8E93B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run cb5a37fb3fe30e66c9212ea4075e19feffefcf4f 230290ae5a0a1f7f883ca9b7fb6dac5d7587e87056c7c6dc0d7fa28e91f0eb0a";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3F16703C1CAD6CFD00D58803 /* Sources */ = {
@@ -295,7 +320,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Priority Task/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.markezsoft.prioritytask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -308,7 +338,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Priority Task/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.markezsoft.prioritytask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
