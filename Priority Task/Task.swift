@@ -12,15 +12,15 @@ class Task: NSObject, NSCoding {
     
     // MARK: Archiving Paths
     
-    static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-    static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("tasks")
+    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("tasks")
     
     
     // MARK: Properties
     
     var title: String
     var detail: String
-    var date: NSDate
+    var date: Date
     var urgent: Bool
     var completed: Bool
     
@@ -34,7 +34,7 @@ class Task: NSObject, NSCoding {
     
     // MARK: Initialization
     
-    init?(title: String, detail: String?, date: NSDate, urgent: Bool, completed: Bool) {
+    init?(title: String, detail: String?, date: Date, urgent: Bool, completed: Bool) {
         self.title = title
         self.detail = detail ?? String()
         self.date = date
@@ -49,27 +49,27 @@ class Task: NSObject, NSCoding {
         }
     }
     
-    convenience init?(title: String, detail: String?, date: NSDate, urgent: Bool) {
+    convenience init?(title: String, detail: String?, date: Date, urgent: Bool) {
         self.init(title: title, detail: detail, date: date, urgent: urgent, completed: false)
     }
     
     // MARK: NSCoding
     required convenience init?(coder aDecoder: NSCoder) {
         
-        let title = aDecoder.decodeObjectForKey(PropertyKey.titleKey) as! String
-        let detail = aDecoder.decodeObjectForKey(PropertyKey.detailKey) as! String
-        let date = aDecoder.decodeObjectForKey(PropertyKey.dateKey) as! NSDate
-        let urgent = aDecoder.decodeBoolForKey(PropertyKey.urgentKey)
-        let completed = aDecoder.decodeBoolForKey(PropertyKey.completedKey)
+        let title = aDecoder.decodeObject(forKey: PropertyKey.titleKey) as! String
+        let detail = aDecoder.decodeObject(forKey: PropertyKey.detailKey) as! String
+        let date = aDecoder.decodeObject(forKey: PropertyKey.dateKey) as! Date
+        let urgent = aDecoder.decodeBool(forKey: PropertyKey.urgentKey)
+        let completed = aDecoder.decodeBool(forKey: PropertyKey.completedKey)
         
         self.init(title: title, detail: detail, date: date, urgent: urgent, completed: completed)
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(title, forKey: PropertyKey.titleKey)
-        aCoder.encodeObject(detail, forKey: PropertyKey.detailKey)
-        aCoder.encodeObject(date, forKey: PropertyKey.dateKey)
-        aCoder.encodeBool(urgent, forKey: PropertyKey.urgentKey)
-        aCoder.encodeBool(completed, forKey: PropertyKey.completedKey)
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(title, forKey: PropertyKey.titleKey)
+        aCoder.encode(detail, forKey: PropertyKey.detailKey)
+        aCoder.encode(date, forKey: PropertyKey.dateKey)
+        aCoder.encode(urgent, forKey: PropertyKey.urgentKey)
+        aCoder.encode(completed, forKey: PropertyKey.completedKey)
     }
 }

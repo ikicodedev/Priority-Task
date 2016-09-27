@@ -21,20 +21,20 @@ struct AppColor {
 
 extension UINavigationBar {
     
-    public override func awakeFromNib() {
-        self.tintColor = UIColor.whiteColor()
-        self.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+    open override func awakeFromNib() {
+        self.tintColor = UIColor.white
+        self.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         self.barTintColor = AppColor.blue
     }
 }
 
 extension UITextView {
     
-    public override func awakeFromNib() {
-        self.tintColor = UIColor.lightGrayColor()
-        self.textColor = UIColor.lightGrayColor()
-        self.backgroundColor = UIColor.groupTableViewBackgroundColor()
-        self.layer.borderColor = UIColor.lightGrayColor().CGColor
+    open override func awakeFromNib() {
+        self.tintColor = UIColor.lightGray
+        self.textColor = UIColor.lightGray
+        self.backgroundColor = UIColor.groupTableViewBackground
+        self.layer.borderColor = UIColor.lightGray.cgColor
         self.layer.borderWidth = 0.5
         self.layer.cornerRadius = 6;
         self.clipsToBounds = true;
@@ -43,10 +43,10 @@ extension UITextView {
 
 extension UITextField {
     
-    public override func awakeFromNib() {
-        self.tintColor = UIColor.lightGrayColor()
-        self.textColor = UIColor.lightGrayColor()
-        self.backgroundColor = UIColor.groupTableViewBackgroundColor()
+    open override func awakeFromNib() {
+        self.tintColor = UIColor.lightGray
+        self.textColor = UIColor.lightGray
+        self.backgroundColor = UIColor.groupTableViewBackground
         self.layer.cornerRadius = 6;
         self.clipsToBounds = true;
     }

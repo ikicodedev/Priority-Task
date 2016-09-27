@@ -36,7 +36,7 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
         titleTextField.delegate = self
         
-        self.completeLabel.hidden = true
+        self.completeLabel.isHidden = true
         
         // Description placeholder
         descriptionTextView.delegate = self
@@ -46,17 +46,17 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         let tapDismiss = UITapGestureRecognizer(target: self, action: #selector(dismissDescriptionKeyboard))
         self.view.addGestureRecognizer(tapDismiss)
         
-        self.setTaskDate(NSDate())
+        self.setTaskDate(Date())
         
         if let task = task {
             setNavigationBarTitle(task.title)
             titleTextField.text = task.title
             descriptionTextView.text = task.detail
-            self.setTaskDate(task.date)
-            urgentSwitch.on = task.urgent
+            self.setTaskDate(task.date as Date)
+            urgentSwitch.isOn = task.urgent
             
             if task.completed {
-                self.completeLabel.hidden = false
+                self.completeLabel.isHidden = false
             }
         }
         
@@ -66,49 +66,49 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     // MARK: Actions
     
-    @IBAction func dateEditing(sender: UITextField) {
+    @IBAction func dateEditing(_ sender: UITextField) {
         
         let toolBar = UIToolbar()
-        toolBar.barStyle = UIBarStyle.Default
-        toolBar.translucent = true
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
         toolBar.sizeToFit()
         
         let datePickerView:UIDatePicker = UIDatePicker()
-        datePickerView.timeZone = NSTimeZone.localTimeZone()
-        datePickerView.datePickerMode = UIDatePickerMode.Date
-        datePickerView.addTarget(self, action: #selector(datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
+        datePickerView.timeZone = TimeZone.autoupdatingCurrent
+        datePickerView.datePickerMode = UIDatePickerMode.date
+        datePickerView.addTarget(self, action: #selector(datePickerValueChanged), for: UIControlEvents.valueChanged)
         
-        if let dateText = dateTextField.text where !dateText.isEmpty {
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
-            datePickerView.date = dateFormatter.dateFromString(dateText)!
+        if let dateText = dateTextField.text , !dateText.isEmpty {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = DateFormatter.Style.short
+            datePickerView.date = dateFormatter.date(from: dateText)!
         }
         
-        let doneButton = UIBarButtonItem(title: "Hecho", style: .Done, target: self, action: #selector(doneDateButton))
+        let doneButton = UIBarButtonItem(title: "Hecho", style: .done, target: self, action: #selector(doneDateButton))
         doneButton.tintColor = AppColor.blue
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         
         toolBar.setItems([spaceButton, doneButton], animated: false)
-        toolBar.userInteractionEnabled = true
+        toolBar.isUserInteractionEnabled = true
         
         sender.inputView = datePickerView
         sender.inputAccessoryView = toolBar
     }
     
-    func doneDateButton(sender:UIButton)
+    func doneDateButton(_ sender:UIButton)
     {
         dateTextField.resignFirstResponder()
     }
     
-    func datePickerValueChanged(sender:UIDatePicker) {
+    func datePickerValueChanged(_ sender:UIDatePicker) {
         
-        let currentDate = NSDate()
+        let currentDate = Date()
         
-        if NSCalendar.currentCalendar().compareDate(currentDate, toDate:sender.date, toUnitGranularity:NSCalendarUnit.Day) == NSComparisonResult.OrderedDescending {
+        if (Calendar.current as NSCalendar).compare(currentDate, to:sender.date, toUnitGranularity:NSCalendar.Unit.day) == ComparisonResult.orderedDescending {
             
-            let alert = UIAlertController(title: "Atención", message: "La fecha tiene que ser la de hoy o una futura", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Atención", message: "La fecha tiene que ser la de hoy o una futura", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             
         }
         else {
@@ -117,31 +117,31 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
     }
     
-    @IBAction func cancel(sender: UIBarButtonItem) {
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
         
         // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
         let isPresentingInAddMealMode = presentingViewController is UINavigationController
         
         if isPresentingInAddMealMode {
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
         else {
-            navigationController!.popViewControllerAnimated(true)
+            navigationController!.popViewController(animated: true)
         }
     }
     
     // MARK: - UITextFieldDelegate
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         // Disable the Save button while editing.
-        saveButton.enabled = false
+        saveButton.isEnabled = false
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
         checkValidTaskName()
         
@@ -155,19 +155,19 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     func checkValidTaskName() {
         // Disable the Save button if the text field is empty.
         let text = titleTextField.text ?? String()
-        saveButton.enabled = !text.isEmpty
+        saveButton.isEnabled = !text.isEmpty
     }
     
     // MARK: UITextViewDelegate
 
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         if (textView.text.isEmpty) {
             textView.text = DESCRIPTION_TASK_PLACEHOLDER
         }
         textView.resignFirstResponder()
     }
     
-    func textViewDidBeginEditing(textView: UITextView){
+    func textViewDidBeginEditing(_ textView: UITextView){
         if (textView.text == DESCRIPTION_TASK_PLACEHOLDER){
             textView.text = String()
         }
@@ -176,19 +176,19 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     // MARK: Navigation
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if saveButton === sender {
+        if sender as! UIBarButtonItem === saveButton {
             
             let title = titleTextField.text ?? ""
             let detail = descriptionTextView.text ?? ""
             
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
-            dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
-            let date = dateFormatter.dateFromString(dateTextField.text!)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = DateFormatter.Style.short
+            dateFormatter.timeStyle = DateFormatter.Style.none
+            let date = dateFormatter.date(from: dateTextField.text!)
             
-            let urgent = urgentSwitch.on
+            let urgent = urgentSwitch.isOn
             
             let complete = task?.completed ?? false
             
@@ -198,21 +198,21 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     // MARK: Auxiliar methods
     
-    func setTaskDate(date: NSDate){
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
-        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+    func setTaskDate(_ date: Date){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.short
+        dateFormatter.timeStyle = DateFormatter.Style.none
         
-        dateTextField.text = dateFormatter.stringFromDate(date)
+        dateTextField.text = dateFormatter.string(from: date)
     }
     
     func dismissDescriptionKeyboard(){
         descriptionTextView.resignFirstResponder()
     }
     
-    func setNavigationBarTitle(title: String) {
+    func setNavigationBarTitle(_ title: String) {
         if title.characters.count > NAVIGATION_BAR_TITLE_SIZE {
-            navigationItem.title = title.substringToIndex(title.startIndex.advancedBy(NAVIGATION_BAR_TITLE_SIZE)) + " ..."
+            navigationItem.title = title.substring(to: title.characters.index(title.startIndex, offsetBy: NAVIGATION_BAR_TITLE_SIZE)) + " ..."
         }
         else {
             navigationItem.title = title

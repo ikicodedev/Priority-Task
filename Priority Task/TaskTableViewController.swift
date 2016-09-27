@@ -17,7 +17,7 @@ class TaskTableViewController: UITableViewController {
     
     // MARK: Properties
     
-    let dateFormatter = NSDateFormatter()
+    let dateFormatter = DateFormatter()
 
     // MARK: Lifecycle
     
@@ -27,8 +27,8 @@ class TaskTableViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 60
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
-        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
-        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+        dateFormatter.dateStyle = DateFormatter.Style.short
+        dateFormatter.timeStyle = DateFormatter.Style.none
         
         // Load any saved meals, otherwise load sample data.
         if !loadTasks() {
@@ -36,16 +36,16 @@ class TaskTableViewController: UITableViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tableView.separatorStyle = .None
+        self.tableView.separatorStyle = .none
         self.tableView.reloadData()
     }
     
     func loadSampleTasks() {
         
-        let task = Task(title: "Ejemplo de tarea normal", detail: "Descripción de tarea normal", date: NSDate(), urgent: false)!
-        let urgentTask = Task(title: "Ejemplo de tarea urgente", detail: "Descripción de tarea urgente", date: NSDate(), urgent: true)!
+        let task = Task(title: "Ejemplo de tarea normal", detail: "Descripción de tarea normal", date: Date(), urgent: false)!
+        let urgentTask = Task(title: "Ejemplo de tarea urgente", detail: "Descripción de tarea urgente", date: Date(), urgent: true)!
     
         addTaskToList(task)
         addTaskToList(urgentTask)
@@ -54,23 +54,23 @@ class TaskTableViewController: UITableViewController {
     }
     
     // MARK: Actions
-    @IBAction func unwindToTaskList(sender: UIStoryboardSegue) {
+    @IBAction func unwindToTaskList(_ sender: UIStoryboardSegue) {
         
-        if let sourceViewController = sender.sourceViewController as? TaskViewController, task = sourceViewController.task {
+        if let sourceViewController = sender.source as? TaskViewController, let task = sourceViewController.task {
             
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing task
-                let dateString = sortedSections[selectedIndexPath.section]
-                let newDateTask = dateFormatter.stringFromDate(task.date)
+                let dateString = sortedSections[(selectedIndexPath as NSIndexPath).section]
+                let newDateTask = dateFormatter.string(from: task.date as Date)
                 
                 if dateString == newDateTask {
-                    sections[dateString]?[selectedIndexPath.row] = task
+                    sections[dateString]?[(selectedIndexPath as NSIndexPath).row] = task
                 }
                 else {
-                    sections[dateString]?.removeAtIndex(selectedIndexPath.row)
+                    sections[dateString]?.remove(at: (selectedIndexPath as NSIndexPath).row)
                     addTaskToList(task)
                     if sections[dateString]?.count == 0 {
-                        sections.removeValueForKey(dateString)
+                        sections.removeValue(forKey: dateString)
                     }
                     setSortedSections()
                 }
@@ -88,13 +88,13 @@ class TaskTableViewController: UITableViewController {
 
     // MARK: Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         if sortedSections.count == 0 {
-            let noDataLabel: UILabel = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
+            let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
             noDataLabel.text = "Todas las tareas han sido completadas"
             noDataLabel.textColor = AppColor.blue
-            noDataLabel.textAlignment = .Center
+            noDataLabel.textAlignment = .center
             tableView.backgroundView = noDataLabel
         } else {
             tableView.backgroundView = nil
@@ -103,7 +103,7 @@ class TaskTableViewController: UITableViewController {
         return sortedSections.count
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let taskCountInSection = sections[sortedSections[section]] {
             return taskCountInSection.count
@@ -113,12 +113,12 @@ class TaskTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("taskCell", forIndexPath: indexPath) as! TaskTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskTableViewCell
 
-        let dateSection = sortedSections[indexPath.section]
-        let task = sections[dateSection]?[indexPath.row]
+        let dateSection = sortedSections[(indexPath as NSIndexPath).section]
+        let task = sections[dateSection]?[(indexPath as NSIndexPath).row]
         
         // Appearance
         if task!.urgent {
@@ -134,7 +134,7 @@ class TaskTableViewController: UITableViewController {
         
         cell.contentTaskView.layer.cornerRadius = 10
         cell.contentTaskView.clipsToBounds = true
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         
         // Task data
         if task!.completed {
@@ -148,18 +148,18 @@ class TaskTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         var result = Array<UITableViewRowAction>()
         
-        let dateSection = self.sortedSections[indexPath.section]
-        if let selectedTask = self.sections[dateSection]?[indexPath.row] {
+        let dateSection = self.sortedSections[(indexPath as NSIndexPath).section]
+        if let selectedTask = self.sections[dateSection]?[(indexPath as NSIndexPath).row] {
             
             // Complete Action
-            let complete = UITableViewRowAction(style: .Normal, title: "Completar") { action, index in
+            let complete = UITableViewRowAction(style: .normal, title: "Completar") { action, index in
                 
                 selectedTask.completed = true
                 
@@ -170,7 +170,7 @@ class TaskTableViewController: UITableViewController {
             complete.backgroundColor = AppColor.golden
             
             // Pending Action
-            let pending = UITableViewRowAction(style: .Normal, title: "Pendiente") { action, index in
+            let pending = UITableViewRowAction(style: .normal, title: "Pendiente") { action, index in
                 
                 selectedTask.completed = false
                 
@@ -181,7 +181,7 @@ class TaskTableViewController: UITableViewController {
             pending.backgroundColor = AppColor.golden
             
             // Share Action
-            let share = UITableViewRowAction(style: .Normal, title: "Compartir") { action, index in
+            let share = UITableViewRowAction(style: .normal, title: "Compartir") { action, index in
                 
                 var shareText = dateSection + " - " + selectedTask.title
                 
@@ -190,18 +190,18 @@ class TaskTableViewController: UITableViewController {
                 }
                 
                 let vc = UIActivityViewController(activityItems: [shareText], applicationActivities: [])
-                self.presentViewController(vc, animated: true, completion: nil)
+                self.present(vc, animated: true, completion: nil)
                 
             }
             share.backgroundColor = AppColor.blue
             
             // Delete Action
-            let delete = UITableViewRowAction(style: .Normal, title: "Eliminar") { action, index in
+            let delete = UITableViewRowAction(style: .normal, title: "Eliminar") { action, index in
                 
-                self.sections[dateSection]?.removeAtIndex(index.row)
+                self.sections[dateSection]?.remove(at: (index as NSIndexPath).row)
                 
                 if self.sections[dateSection]?.count == 0 {
-                    self.sections.removeValueForKey(dateSection)
+                    self.sections.removeValue(forKey: dateSection)
                     self.setSortedSections()
                 }
                 
@@ -209,7 +209,7 @@ class TaskTableViewController: UITableViewController {
                 tableView.reloadData()
                 
             }
-            delete.backgroundColor = UIColor.redColor()
+            delete.backgroundColor = UIColor.red
             
             // Select action 
             result.append(delete)
@@ -227,23 +227,23 @@ class TaskTableViewController: UITableViewController {
         return result
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // the cells you would like the actions to appear needs to be editable
         return true
     }
     
     // MARK: TableView Delegate
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 25
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
-        headerView.backgroundColor = UIColor.whiteColor()
+        headerView.backgroundColor = UIColor.white
         let title = UILabel(frame: CGRect(x: 0, y: 5, width: self.view.frame.width - 10, height: 20))
         title.textColor = AppColor.gray
-        title.textAlignment = .Right
+        title.textAlignment = .right
         title.text = sortedSections[section]
         headerView.addSubview(title)
         return headerView
@@ -251,16 +251,16 @@ class TaskTableViewController: UITableViewController {
     
     // MARK Navigation
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "ShowTaskDetail" {
             
-            let taskViewController = segue.destinationViewController as! TaskViewController
+            let taskViewController = segue.destination as! TaskViewController
             
             if let selectedTaskCell = sender as? TaskTableViewCell {
-                let indexPath = tableView.indexPathForCell(selectedTaskCell)!
-                let dateSection = sortedSections[indexPath.section]
-                let selectedTask = sections[dateSection]?[indexPath.row]
+                let indexPath = tableView.indexPath(for: selectedTaskCell)!
+                let dateSection = sortedSections[(indexPath as NSIndexPath).section]
+                let selectedTask = sections[dateSection]?[(indexPath as NSIndexPath).row]
                 taskViewController.task = selectedTask
             }
         }
@@ -277,7 +277,7 @@ class TaskTableViewController: UITableViewController {
             tasks += taskArray
         }
         
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(tasks, toFile: Task.ArchiveURL.path!)
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(tasks, toFile: Task.ArchiveURL.path)
         if !isSuccessfulSave {
             print("Failed to save tasks...")
         }
@@ -285,7 +285,7 @@ class TaskTableViewController: UITableViewController {
     
     func loadTasks() -> Bool {
         
-        if let tasks = NSKeyedUnarchiver.unarchiveObjectWithFile(Task.ArchiveURL.path!) as? [Task] {
+        if let tasks = NSKeyedUnarchiver.unarchiveObject(withFile: Task.ArchiveURL.path) as? [Task] {
             
             for task in tasks {
                 self.addTaskToList(task)
@@ -303,12 +303,12 @@ class TaskTableViewController: UITableViewController {
     
     // MARK: Auxiliar methods
     func setSortedSections() {
-        self.sortedSections = [String](self.sections.keys.sort(){dateFormatter.dateFromString($0)!.compare(dateFormatter.dateFromString($1)!) == .OrderedAscending})
+        self.sortedSections = [String](self.sections.keys.sorted(){dateFormatter.date(from: $0)!.compare(dateFormatter.date(from: $1)!) == .orderedAscending})
     }
 
-    func addTaskToList(task: Task) {
-        let dateString = dateFormatter.stringFromDate(task.date)
-        if self.sections.indexForKey(dateString) == nil {
+    func addTaskToList(_ task: Task) {
+        let dateString = dateFormatter.string(from: task.date as Date)
+        if self.sections.index(forKey: dateString) == nil {
             self.sections[dateString] = [task]
         }
         else {
